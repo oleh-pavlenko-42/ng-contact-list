@@ -1,0 +1,18 @@
+:host {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  padding: 8px 16px;
+  width: 90%;
+}
+
+@media (min-width: 768px) {
+  .form-group {
+    width: 640px;
+  }
+}
