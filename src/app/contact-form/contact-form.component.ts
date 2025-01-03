@@ -1,4 +1,4 @@
-import { Component, viewChild } from '@angular/core';
+import { Component, inject, viewChild } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -15,6 +15,7 @@ import {
   MAT_DATE_LOCALE,
   provideNativeDateAdapter,
 } from '@angular/material/core';
+import { ContactsService } from '../contacts.service';
 
 @Component({
   selector: 'app-contact-form',
@@ -36,6 +37,7 @@ import {
 })
 export class ContactFormComponent {
   private formDirective = viewChild<NgForm>('formDirective');
+  private contactsService = inject(ContactsService);
 
   form = new FormGroup({
     firstName: new FormControl('', Validators.required),
@@ -55,7 +57,14 @@ export class ContactFormComponent {
 
   onSubmit() {
     if (this.form.valid) {
-      console.log(this.form.value);
+      this.contactsService.addContact({
+        firstName: this.form.value.firstName!,
+        lastName: this.form.value.lastName!,
+        phone: this.form.value.phone!,
+        dateOfBirth: this.form.value.dateOfBirth || '',
+        email: this.form.value.email || '',
+        address: this.form.value.address || '',
+      });
       this.formDirective()?.resetForm();
     }
   }
