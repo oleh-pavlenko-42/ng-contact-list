@@ -29,4 +29,8 @@ export class ContactsService {
   addContact(contact: Contact) {
     this.contacts.update((contacts) => [...contacts, contact]);
   }
+
+  getContact(contactId: string): Contact | null {
+    return this.contacts().find((contact) => (contact.id = contactId)) || null;
+  }
 }

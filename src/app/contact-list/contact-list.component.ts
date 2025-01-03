@@ -2,10 +2,11 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { ContactListItemComponent } from './contact-list-item/contact-list-item.component';
 import { ContactsService } from '../contacts.service';
 import { Contact } from '../contact.model';
+import { ContactFormComponent } from '../contact-form/contact-form.component';
 
 @Component({
   selector: 'app-contact-list',
-  imports: [ContactListItemComponent],
+  imports: [ContactListItemComponent, ContactFormComponent],
   standalone: true,
   templateUrl: './contact-list.component.html',
   styleUrl: './contact-list.component.scss',
