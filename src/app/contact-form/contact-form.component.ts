@@ -58,6 +58,7 @@ export class ContactFormComponent {
   onSubmit() {
     if (this.form.valid) {
       this.contactsService.addContact({
+        id: new Date().getTime() + this.form.value.phone!,
         firstName: this.form.value.firstName!,
         lastName: this.form.value.lastName!,
         phone: this.form.value.phone!,

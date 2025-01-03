@@ -1,14 +1,16 @@
 import { effect, Injectable, signal } from '@angular/core';
 import { Contact } from './contact.model';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ContactsService {
   private contacts = signal<Contact[]>([]);
+  private contactsSubject = new BehaviorSubject<Contact[]>([]);
 
   get allContacts() {
-    return this.contacts.asReadonly();
+    return this.contactsSubject.asObservable();
   }
 
   constructor() {
@@ -20,6 +22,7 @@ export class ContactsService {
     }
     effect(() => {
       localStorage.setItem('contacts', JSON.stringify(this.contacts()));
+      this.contactsSubject.next(this.contacts());
     });
   }
 
