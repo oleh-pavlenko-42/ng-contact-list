@@ -40,8 +40,14 @@ export class ContactListComponent implements OnInit, AfterViewInit {
   contacts = signal<Contact[]>([]);
 
   ngOnInit(): void {
-    this.contactsService.allContacts.subscribe((allContacts) => {
-      this.contacts.set(allContacts);
+    const subscription = this.contactsService.allContacts.subscribe(
+      (allContacts) => {
+        this.contacts.set(allContacts);
+      }
+    );
+
+    this.destroyRef.onDestroy(() => {
+      subscription.unsubscribe();
     });
   }
 
