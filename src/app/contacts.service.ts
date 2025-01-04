@@ -33,4 +33,21 @@ export class ContactsService {
   getContact(contactId: string): Contact | null {
     return this.contacts().find((contact) => contact.id === contactId) || null;
   }
+
+  searchContacts(searchValue: string): Contact[] {
+    return this.contacts().filter((contact) => {
+      return (
+        `${contact.firstName} ${contact.lastName}`
+          .toLowerCase()
+          .includes(searchValue.toLowerCase()) ||
+        `${contact.lastName} ${contact.firstName}`
+          .toLowerCase()
+          .includes(searchValue.toLowerCase()) ||
+        contact.firstName.toLowerCase().includes(searchValue.toLowerCase()) ||
+        contact.lastName.toLowerCase().includes(searchValue.toLowerCase()) ||
+        contact.phone.toLowerCase().includes(searchValue.toLowerCase()) ||
+        contact.email?.toLowerCase().includes(searchValue.toLowerCase())
+      );
+    });
+  }
 }

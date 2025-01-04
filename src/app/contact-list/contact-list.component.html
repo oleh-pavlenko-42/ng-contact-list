@@ -1,3 +1,12 @@
+<form #searchForm="ngForm">
+  <mat-form-field>
+    <input matInput type="text" placeholder="Search" name="search" ngModel #contactSearch>
+    <button matPrefix mat-icon-button aria-label="Close" type="button">
+      <mat-icon>search</mat-icon>
+    </button>
+  </mat-form-field>
+</form>
+
 @if(addContactFormOpen()) {
 <app-contact-form (close)="closeAddContactForm()" />
 } @else {
