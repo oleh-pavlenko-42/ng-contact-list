@@ -8,6 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { DeleteConfirmationDialogComponent } from './delete-confirmation-dialog/delete-confirmation-dialog.component';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-contact-details',
@@ -17,6 +18,7 @@ import { DeleteConfirmationDialogComponent } from './delete-confirmation-dialog/
     MatIconModule,
     MatButtonModule,
     MatDialogModule,
+    DatePipe,
   ],
   standalone: true,
   templateUrl: './contact-details.component.html',
