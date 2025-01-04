@@ -1,4 +1,12 @@
-import { Component, inject, output, signal, viewChild } from '@angular/core';
+import {
+  Component,
+  computed,
+  inject,
+  input,
+  OnInit,
+  output,
+  viewChild,
+} from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -17,6 +25,7 @@ import {
 } from '@angular/material/core';
 import { ContactsService } from '../contacts.service';
 import { MatCardModule } from '@angular/material/card';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-contact-form',
@@ -37,11 +46,13 @@ import { MatCardModule } from '@angular/material/card';
     { provide: MAT_DATE_LOCALE, useValue: 'en-GB' },
   ],
 })
-export class ContactFormComponent {
+export class ContactFormComponent implements OnInit {
   private formDirective = viewChild<NgForm>('formDirective');
   private contactsService = inject(ContactsService);
+  private router = inject(Router);
 
-  isEditMode = signal(false);
+  contactId = input<string>();
+  isEditMode = computed(() => !!this.contactId());
   close = output();
   form = new FormGroup({
     firstName: new FormControl('', Validators.required),
@@ -55,26 +66,44 @@ export class ContactFormComponent {
     address: new FormControl(''),
   });
 
+  ngOnInit(): void {
+    if (this.isEditMode()) {
+      const contact = this.contactsService.getContact(this.contactId()!);
+      this.form.patchValue(contact!);
+    }
+  }
+
   deleteValue(formControl: FormControl) {
     formControl.reset();
   }
 
-  closeAddContactForm() {
-    this.close.emit();
+  closeContactForm() {
+    if (this.isEditMode()) {
+      this.router.navigate(['/details', this.contactId()]);
+    } else {
+      this.close.emit();
+    }
   }
 
   onSubmit() {
     if (this.form.valid) {
-      this.contactsService.addContact({
-        id: new Date().getTime() + this.form.value.phone!,
+      const contact = {
+        id: this.contactId() || new Date().getTime() + this.form.value.phone!,
         firstName: this.form.value.firstName!,
         lastName: this.form.value.lastName!,
         phone: this.form.value.phone!,
         dateOfBirth: this.form.value.dateOfBirth || '',
         email: this.form.value.email || '',
         address: this.form.value.address || '',
-      });
+      };
+
+      if (this.isEditMode()) {
+        this.contactsService.editContact(contact);
+      } else {
+        this.contactsService.addContact(contact);
+      }
       this.formDirective()?.resetForm();
+      this.closeContactForm();
     }
   }
 }

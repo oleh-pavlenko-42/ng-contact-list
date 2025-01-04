@@ -27,5 +27,9 @@
       <p>{{contact()?.address}}</p>
     </div>
   </mat-card-content>
+  <mat-card-actions>
+    <button mat-button (click)="onEdit()">Edit</button>
+    <button mat-button class="warn-button" (click)="onDelete()">Delete</button>
+  </mat-card-actions>
 </mat-card>
 }

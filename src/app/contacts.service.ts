@@ -50,4 +50,21 @@ export class ContactsService {
       );
     });
   }
+
+  editContact(updatedContact: Contact) {
+    this.contacts.update((contacts) => {
+      return contacts.map((contact) => {
+        if (contact.id === updatedContact.id) {
+          return updatedContact;
+        }
+        return contact;
+      });
+    });
+  }
+
+  deleteContact(contactId: string) {
+    this.contacts.update((contacts) => {
+      return contacts.filter((contact) => contact.id !== contactId);
+    });
+  }
 }
