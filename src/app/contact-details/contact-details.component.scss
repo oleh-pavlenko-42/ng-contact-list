@@ -3,6 +3,13 @@
   padding: 8px 16px;
 }
 
+mat-card-header {
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: start;
+  gap: 8px;
+}
+
 .row {
   display: grid;
   grid-template-columns: 1fr 1fr;

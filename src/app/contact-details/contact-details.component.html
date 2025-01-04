@@ -1,31 +1,31 @@
 @if (contact()) {
-<div class="row">
-  <h4>First Name</h4>
-  <p>{{contact()?.firstName}}</p>
-</div>
-<mat-divider></mat-divider>
-<div class="row">
-  <h4>Last Name</h4>
-  <p>{{contact()?.lastName}}</p>
-</div>
-<mat-divider></mat-divider>
-<div class="row">
-  <h4>Phone</h4>
-  <p>{{contact()?.phone}}</p>
-</div>
-<mat-divider></mat-divider>
-<div class="row">
-  <h4>Date of Birth</h4>
-  <p>{{contact()?.dateOfBirth}}</p>
-</div>
-<mat-divider></mat-divider>
-<div class="row">
-  <h4>Email</h4>
-  <p>{{contact()?.email}}</p>
-</div>
-<mat-divider></mat-divider>
-<div class="row">
-  <h4>Address</h4>
-  <p>{{contact()?.address}}</p>
-</div>
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <button matSuffix mat-icon-button aria-label="Back" type="button" (click)="back()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <mat-card-title>{{contact()?.firstName}} {{contact()?.lastName}}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="row">
+      <h4>Phone</h4>
+      <p>{{contact()?.phone}}</p>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="row">
+      <h4>Date of Birth</h4>
+      <p>{{contact()?.dateOfBirth}}</p>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="row">
+      <h4>Email</h4>
+      <p>{{contact()?.email}}</p>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="row">
+      <h4>Address</h4>
+      <p>{{contact()?.address}}</p>
+    </div>
+  </mat-card-content>
+</mat-card>
 }

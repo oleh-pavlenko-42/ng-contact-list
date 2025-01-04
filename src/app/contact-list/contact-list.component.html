@@ -1,4 +1,8 @@
-<app-contact-form />
+@if(addContactFormOpen()) {
+<app-contact-form (close)="closeAddContactForm()" />
+} @else {
+<button mat-flat-button type="button" class="add-contact-button" (click)="openAddContactForm()">Add Contact</button>
+}
 
 @for (contact of contacts(); track contact.id) {
 <app-contact-list-item [contact]="contact" />

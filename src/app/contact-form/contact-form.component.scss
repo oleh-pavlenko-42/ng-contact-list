@@ -4,15 +4,25 @@
   width: 100%;
 }
 
+mat-card {
+  width: 100%;
+  margin: 20px 0;
+
+  mat-card-header {
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
 .form-group {
   display: flex;
   flex-direction: column;
   padding: 8px 16px;
-  width: 90%;
+  width: 100%;
 }
 
 @media (min-width: 768px) {
-  .form-group {
+  mat-card {
     width: 640px;
   }
 }

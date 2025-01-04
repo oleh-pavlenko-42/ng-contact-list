@@ -1,4 +1,4 @@
-import { Component, inject, viewChild } from '@angular/core';
+import { Component, inject, output, signal, viewChild } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -16,6 +16,7 @@ import {
   provideNativeDateAdapter,
 } from '@angular/material/core';
 import { ContactsService } from '../contacts.service';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-contact-form',
@@ -26,6 +27,7 @@ import { ContactsService } from '../contacts.service';
     MatIcon,
     MatButtonModule,
     MatDatepickerModule,
+    MatCardModule,
   ],
   standalone: true,
   templateUrl: './contact-form.component.html',
@@ -39,6 +41,8 @@ export class ContactFormComponent {
   private formDirective = viewChild<NgForm>('formDirective');
   private contactsService = inject(ContactsService);
 
+  isEditMode = signal(false);
+  close = output();
   form = new FormGroup({
     firstName: new FormControl('', Validators.required),
     lastName: new FormControl('', Validators.required),
@@ -53,6 +57,10 @@ export class ContactFormComponent {
 
   deleteValue(formControl: FormControl) {
     formControl.reset();
+  }
+
+  closeAddContactForm() {
+    this.close.emit();
   }
 
   onSubmit() {

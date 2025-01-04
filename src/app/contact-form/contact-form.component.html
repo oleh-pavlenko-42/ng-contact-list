@@ -1,59 +1,68 @@
-<form [formGroup]="form" class="form-group" (ngSubmit)="onSubmit()" #formDirective="ngForm">
-  <mat-form-field>
-    <mat-label>First Name</mat-label>
-    <input matInput type="text" formControlName="firstName">
-    @if (form.controls.firstName.value) {
-    <button matSuffix mat-icon-button aria-label="Clear" (click)="deleteValue(form.controls.firstName)" type="button">
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>{{isEditMode() ? 'Edit' : 'Add'}} Contact</mat-card-title>
+    <button mat-icon-button aria-label="Close" (click)="closeAddContactForm()" type="button">
       <mat-icon>close</mat-icon>
     </button>
-    }
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Last Name</mat-label>
-    <input matInput type="text" formControlName="lastName">
-    @if (form.controls.lastName.value) {
-    <button matSuffix mat-icon-button aria-label="Clear" (click)="deleteValue(form.controls.lastName)" type="button">
-      <mat-icon>close</mat-icon>
-    </button>
-    }
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Phone</mat-label>
-    <input matInput type="text" formControlName="phone">
-    @if (form.controls.phone.value) {
-    <button matSuffix mat-icon-button aria-label="Clear" (click)="deleteValue(form.controls.phone)" type="button">
-      <mat-icon>close</mat-icon>
-    </button>
-    }
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Date of Birth</mat-label>
-    <input matInput [matDatepicker]="datepicker" formControlName="dateOfBirth">
-    <mat-datepicker #datepicker />
-    <mat-datepicker-toggle [for]="datepicker" matSuffix />
-    @if (form.controls.dateOfBirth.value) {
-    <button matSuffix mat-icon-button aria-label="Clear" (click)="deleteValue(form.controls.dateOfBirth)" type="button">
-      <mat-icon>close</mat-icon>
-    </button>
-    }
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Email</mat-label>
-    <input matInput type="email" formControlName="email">
-    @if (form.controls.email.value) {
-    <button matSuffix mat-icon-button aria-label="Clear" (click)="deleteValue(form.controls.email)" type="button">
-      <mat-icon>close</mat-icon>
-    </button>
-    }
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Address</mat-label>
-    <input matInput type="text" formControlName="address">
-    @if (form.controls.address.value) {
-    <button matSuffix mat-icon-button aria-label="Clear" (click)="deleteValue(form.controls.address)" type="button">
-      <mat-icon>close</mat-icon>
-    </button>
-    }
-  </mat-form-field>
-  <button mat-flat-button type="submit">Save</button>
-</form>
+  </mat-card-header>
+  <form [formGroup]="form" class="form-group" (ngSubmit)="onSubmit()" #formDirective="ngForm">
+    <mat-form-field>
+      <mat-label>First Name</mat-label>
+      <input matInput type="text" formControlName="firstName">
+      @if (form.controls.firstName.value) {
+      <button matSuffix mat-icon-button aria-label="Clear" (click)="deleteValue(form.controls.firstName)" type="button">
+        <mat-icon>close</mat-icon>
+      </button>
+      }
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Last Name</mat-label>
+      <input matInput type="text" formControlName="lastName">
+      @if (form.controls.lastName.value) {
+      <button matSuffix mat-icon-button aria-label="Clear" (click)="deleteValue(form.controls.lastName)" type="button">
+        <mat-icon>close</mat-icon>
+      </button>
+      }
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Phone</mat-label>
+      <input matInput type="text" formControlName="phone">
+      @if (form.controls.phone.value) {
+      <button matSuffix mat-icon-button aria-label="Clear" (click)="deleteValue(form.controls.phone)" type="button">
+        <mat-icon>close</mat-icon>
+      </button>
+      }
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Date of Birth</mat-label>
+      <input matInput [matDatepicker]="datepicker" formControlName="dateOfBirth">
+      <mat-datepicker #datepicker />
+      <mat-datepicker-toggle [for]="datepicker" matSuffix />
+      @if (form.controls.dateOfBirth.value) {
+      <button matSuffix mat-icon-button aria-label="Clear" (click)="deleteValue(form.controls.dateOfBirth)"
+        type="button">
+        <mat-icon>close</mat-icon>
+      </button>
+      }
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input matInput type="email" formControlName="email">
+      @if (form.controls.email.value) {
+      <button matSuffix mat-icon-button aria-label="Clear" (click)="deleteValue(form.controls.email)" type="button">
+        <mat-icon>close</mat-icon>
+      </button>
+      }
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Address</mat-label>
+      <input matInput type="text" formControlName="address">
+      @if (form.controls.address.value) {
+      <button matSuffix mat-icon-button aria-label="Clear" (click)="deleteValue(form.controls.address)" type="button">
+        <mat-icon>close</mat-icon>
+      </button>
+      }
+    </mat-form-field>
+    <button mat-flat-button type="submit">Save</button>
+  </form>
+</mat-card>

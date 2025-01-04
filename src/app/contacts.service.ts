@@ -31,6 +31,6 @@ export class ContactsService {
   }
 
   getContact(contactId: string): Contact | null {
-    return this.contacts().find((contact) => (contact.id = contactId)) || null;
+    return this.contacts().find((contact) => contact.id === contactId) || null;
   }
 }
