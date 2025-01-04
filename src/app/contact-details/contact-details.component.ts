@@ -28,8 +28,8 @@ export class ContactDetailsComponent implements OnInit {
   private contactsService = inject(ContactsService);
   private router = inject(Router);
   private route = inject(ActivatedRoute);
-  private dialog = inject(MatDialog);
 
+  public dialog = inject(MatDialog);
   contactId = input.required<string>();
   contact = signal<Contact | null>(null);
 
