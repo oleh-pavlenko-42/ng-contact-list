@@ -42,6 +42,8 @@ describe('ContactsService', () => {
     spyOn(localStorage, 'getItem').and.returnValue(null);
     spyOn(localStorage, 'setItem');
     service = TestBed.inject(ContactsService);
+    service.contacts.set([]);
+    TestBed.flushEffects();
     expect(localStorage.setItem).toHaveBeenCalledWith(
       'contacts',
       JSON.stringify([])
@@ -63,6 +65,7 @@ describe('ContactsService', () => {
   });
 
   it('should search contacts by first name, last name, or other fields', () => {
+    localStorage.setItem('contacts', JSON.stringify(mockContacts));
     service = TestBed.inject(ContactsService);
     const searchResults = service.searchContacts('John');
     expect(searchResults.length).toBe(1);
@@ -86,11 +89,15 @@ describe('ContactsService', () => {
 
   it('should delete a contact', () => {
     service = TestBed.inject(ContactsService);
-
+    service.contacts.set(mockContacts);
     expect(service.getContact('1')).toBeTruthy();
 
     service.deleteContact('1');
 
     expect(service.getContact('1')).toBeFalsy();
+  });
+
+  afterEach(() => {
+    localStorage.removeItem('contacts');
   });
 });

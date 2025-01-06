@@ -1,13 +1,15 @@
 import { effect, Injectable, signal } from '@angular/core';
 import { Contact } from './contact.model';
 import { BehaviorSubject } from 'rxjs';
+import { mockContacts } from './mock-contacts';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ContactsService {
-  private contacts = signal<Contact[]>([]);
   private contactsSubject = new BehaviorSubject<Contact[]>([]);
+
+  contacts = signal<Contact[]>(mockContacts);
 
   get allContacts() {
     return this.contactsSubject.asObservable();
